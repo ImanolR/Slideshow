@@ -12,7 +12,8 @@ public class SlideImage extends SlideItem {
 	                  // We can also load the image when needed instead of having it in memory without using it
 	
 	public SlideImage() {
-		
+		image = null;
+		file  = null;
 	}
 	
 	public SlideImage(File img) {
