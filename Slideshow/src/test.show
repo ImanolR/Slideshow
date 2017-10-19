@@ -1,0 +1,29 @@
+[1]    ; Version number, don't delete
+
+@var x 0.4
+
+;-----------------------------
+@slide
+
+@background 0.8 0.8 0.8 1 ; Set background color
+@text "Sample text"  pos $x 0.5 color 0.2 0.2 0.7 1 ;
+@rect $x 0.3 0.6 0.5 color 0.4 0.85 0.5 0.35
+@rect $x 0.1 0.2 0.2 color 1 0 0 1
+@text "Holi Andrea"
+
+;-----------------------------
+@slide
+@text "The END"
+@background 0.1 0.7 0.3 1
+@text "asdfasdfasd" pos 0.5 0.7 color 0 0 0 0.25
+@text "The end" pos 0.5 0.7 color 0 0 0 0.2
+@text "ASDFASDFASDF" pos 0.5 0.7 color 0 0 0 0.2
+
+;-----------------------------
+@slide
+@text "123456 tesst"
+
+@slide
+@text "End" pos 0.5 0.5
+@rect 0.2 0.2 0.7 0.7 color 1 0.2 0.2 0.3
+@background 0.4 0.7 0.7 1
