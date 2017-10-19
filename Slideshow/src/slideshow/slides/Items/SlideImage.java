@@ -16,6 +16,13 @@ public class SlideImage extends SlideItem {
 	}
 	
 	public SlideImage(File img) {
+		super();
+		file = img;
+		loadImage(img);
+	}
+	
+	public SlideImage(float x, float y, File img) {
+		super(x, y);
 		file = img;
 		loadImage(img);
 	}
