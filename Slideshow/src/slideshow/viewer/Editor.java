@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -40,6 +41,7 @@ public class Editor extends JFrame implements WindowListener {
 	private JTree item_tree;
 	
 	private Slideshow slideshow;
+	private boolean slideshow_modified;
 	
 	// Default constructor. Opens a new empty proyect
 	public Editor() {
@@ -145,7 +147,7 @@ public class Editor extends JFrame implements WindowListener {
 	public void updateItemTree() {
 		DefaultTreeModel model = (DefaultTreeModel) item_tree.getModel();
 
-		// @Todo: check if it needs update
+		// @Todo: check if it needs to be update
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(slideshow);
 		
 		for (int slide_index = 0; slide_index < slideshow.slideCount(); slide_index++) {
@@ -160,7 +162,7 @@ public class Editor extends JFrame implements WindowListener {
 		model.setRoot(root);
 	}
 	
-	public void updateComponents() {
+	public synchronized void updateComponents() {
 		updateMiniatures();
 		updateItemTree();
 		Renderer.renderSlideCentered(slideshow.currentSlide(), canvas.getGraphics(), canvas.getWidth(), canvas.getHeight(), 0);
@@ -179,7 +181,23 @@ public class Editor extends JFrame implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		// @Todo: ask to save before closing
-		
+		if (slideshow_modified) {
+			Object[] options = {"Save", "Ignore", "Cancel"};
+			int res = JOptionPane.showOptionDialog(this, "The project has been modified. Save?", "Save?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			
+			if (res == 0) {
+				// Save
+			}
+			else if (res == 1) {
+				// Ignore
+			}
+			else if (res == 2) {
+				// Cancel
+			}
+			else {
+				assert false: "This code path is not allowed";
+			}
+		}
 	}
 
 	@Override
@@ -189,6 +207,10 @@ public class Editor extends JFrame implements WindowListener {
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
+		// @Important: If update done too soon the components are not fully displayed and the render/update is not done
+		
+		launchDelayedThread(20, () -> 
+		Renderer.renderSlideCentered(slideshow.currentSlide(), canvas.getGraphics(), canvas.getWidth(), canvas.getHeight(), 0));			
 		
 	}
 
@@ -199,6 +221,18 @@ public class Editor extends JFrame implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		updateMiniatures();
+		// @Important: If update done too soon the components are not fully displayed and the render/update is not done
+		launchDelayedThread(20, () -> updateComponents());
+	}
+	
+	public void launchDelayedThread(int delay, Runnable code) {
+		new Thread(() ->  {
+			try {
+				Thread.sleep(delay); // @Hardcoded
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			code.run();	
+		}).start();
 	}
 }
