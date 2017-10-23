@@ -1,31 +1,18 @@
 package slideshow.viewer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellRenderer;
+import javax.swing.*;
+import javax.swing.tree.*;
 
 import slideshow.fileManagement.SlideshowGenerator;
-import slideshow.slides.Items.Slide;
-import slideshow.slides.Items.SlideItem;
-import slideshow.slides.Items.Slideshow;
+import slideshow.slides.Items.*;
 
+@SuppressWarnings("serial")
 public class Editor extends JFrame implements WindowListener {
 
 	public static void main(String[] args) {
