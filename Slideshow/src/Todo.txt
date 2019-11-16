@@ -1,0 +1,46 @@
+===========================
+		TODO List
+===========================
+
+- Handle expanding macros is almost any place when reading a new token
+	- We may have to wrap all the T.get(i) inside a method to check if the retrieved token is a macro and should be expanded
+
+? Add scopes to prevent polution of macros across slides?
+
+- Fullscreen mode
+	
+- Cursor
+	- Smooth moving of the cursor
+	- Maybe multiple kinds of cursors that can be toggled
+		- A dot we can modigy its radius
+		- An arrow that always points to a place we clicked
+
+- Basic text format (text document)
+	- @frame x y w h defines a new reference frame for the following items?
+	  And all the text that gets added gets wrapped by this frame.
+	  @frame_end   	
+	- @Table
+	
+- Add animations (?):
+	- A list of animation keyframes.
+		- Common to all items: 
+			- ItemAnimationPos
+			- ItemAnimationRot
+			- ItemAnimationFillColor
+			- ItemAnimationOutline
+		- TextItems:
+			- TextItemAnimationText
+				? Can we interpolate between 2 texts? or should just be a fadeout fade in?
+			- TextItemAnimationFontName
+				? Can we interpolate between 2 texts? or should just be a fadeout fade in?
+			- TextItemAnimationFontStyle
+			- TextItemAnimationAlignment
+			- TextItemAnimationUndeline
+			- TextItemAnimationDoubleUnderline
+			- TextitemAnimationCrossed
+		- ...
+		
+		
+DONE:
+	- Basic macros
+	- Basic expressions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

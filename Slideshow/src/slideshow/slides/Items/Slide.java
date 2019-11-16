@@ -1,36 +1,26 @@
 package slideshow.slides.Items;
+
 import java.awt.Color;
 import java.util.ArrayList;
 
 public class Slide {
 
+	public Color bg_color;
+	public float aspect_ratio;
+	
 	public ArrayList<SlideItem> items;
 	
-	public Color background_color;
-	
-	//SlideTransition transition; // Fade in method
-
 	public Slide() {
 		items = new ArrayList<SlideItem>();
-		background_color = new Color(100, 100, 100, 255); // Default color
+		aspect_ratio = 16.f / 9.f;
+		bg_color = Color.WHITE.darker();
+//		aspect_ratio = 4.f / 3.f;
 	}
 	
-	public void addItem(SlideItem item) {
-		items.add(item);
-	}
-
-	public void setBackgroundColor(Color color) {
-		background_color = color;
+	public Slide(float aspect) {
+		items = new ArrayList<SlideItem>();
+		bg_color = Color.WHITE.darker();
+		aspect_ratio = aspect;
 	}
 	
-	public void update() {
-		
-	}
-	
-	public String toString() {
-		for (SlideItem item: items) {
-			if (item instanceof SlideText) return ((SlideText)item).text;
-		}
-		return ((Object) this).toString();
-	}
 }

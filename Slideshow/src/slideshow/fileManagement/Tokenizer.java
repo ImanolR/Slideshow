@@ -19,6 +19,7 @@ class Tokenizer {
 	}
 	
 	public void tokenize(String text) {
+		//String token = "";
 		int index = 0;
 		while (index < text.length()) {
 			char c = text.charAt(index);
@@ -39,8 +40,7 @@ class Tokenizer {
 				token += c;
 				index++;
 				c = text.charAt(index);
-				while (Character.isLetter(c) ||
-					   Character.isDigit(c)) {
+				while (!Character.isWhitespace(c)) {
 					// @Debug
 					if (c == '"') break;
 					
@@ -73,8 +73,7 @@ class Tokenizer {
 					token += c;
 					index++;
 					c = text.charAt(index);
-					while (Character.isLetter(c) ||
-						   Character.isDigit(c)) {
+					while (!Character.isWhitespace(c)) {
 						// @Debug
 						if (c == '"') break;
 						
@@ -104,7 +103,10 @@ class Tokenizer {
 				addToken();
 			}
 			
-			
+			if (c == '\n') {
+				token += c;
+				addToken();
+			}
 			if (Character.isWhitespace(c)) index++;
 		}
 		
@@ -122,6 +124,6 @@ class Tokenizer {
 	
 	private void addToken() {
 		list.add(token);
-		token = "";
+		this.token = "";
 	}
 }

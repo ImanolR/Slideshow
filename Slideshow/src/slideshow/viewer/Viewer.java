@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import slideshow.fileManagement.SlideshowGenerator;
 import slideshow.slides.Items.SlideImage;
 import slideshow.slides.Items.SlideItem;
-import slideshow.slides.Items.SlideRectangle;
+import slideshow.slides.Items.SlideRect;
 import slideshow.slides.Items.SlideText;
 import slideshow.slides.Items.Slideshow;
 
@@ -32,11 +32,7 @@ public class Viewer implements KeyListener {
 	      - @slide templetName
 	      - @template templetName
 	   - Images
-	   
-	- UI & Editor
-	  - Radial menu to rapid insertion of items
 */
-	
 	
 	
 	private JFrame window;
@@ -99,7 +95,7 @@ public class Viewer implements KeyListener {
 	private void hotLoad() {
 		long checked = slideshow_file.lastModified();
 		if (checked > lastModified) {
-			SlideshowGenerator.fillSlideshow(slideshow, slideshow_file);
+			SlideshowGenerator.loadSlideshow(slideshow, slideshow_file);
 			lastModified = checked;
 		}
 	}
@@ -119,7 +115,7 @@ public class Viewer implements KeyListener {
 		
 		assert slideshow != null: "Error: the slideshow is not loaded"; 
 		
-		Renderer.renderSlideCentered(slideshow.currentSlide(), canvas.getGraphics(), canvas.getWidth(), canvas.getHeight(), Renderer.CURSOR_VISIBLE);
+		Renderer.render(slideshow.currentSlide(), canvas);
 	}
 
 	private boolean sys_cursor_hidden = false;

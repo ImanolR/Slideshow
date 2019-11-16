@@ -1,90 +1,86 @@
 package slideshow.slides.Items;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class SlideText extends SlideItem {
 
-	public enum Justification {
-		LEFT, CENTER, RIGHT
+	public static final float PT_TO_PX = 1.33333F;
+	public static final float PX_TO_PT = 0.75F;
+	
+	public static enum Alignment {
+		LEFT,
+		CENTER,
+		RIGHT
+	}
+	
+	public static enum FontStyle{
+		PLAIN     (Font.PLAIN),
+		BOLD      (Font.BOLD),
+		ITALIC    (Font.ITALIC),
+		BOLD_ITALIC (Font.BOLD | Font.ITALIC);
+		
+		public final int style;
+		
+		FontStyle(int style) {
+			this.style = style;
+		}
 	}
 	
 	public String text;
 	
+	// #NOTE(Imanol): as the size of the font can vary in relation to the window size
+	// we cannot keep a reference to the font. So we have to keep track of the data that
+	// defines the font we will need to fetch
+	// public Font font;
 	public String font_name;
-	static String DEFAULT_FONT_NAME = "Arial";
+	public FontStyle font_style;
 	
-	public int    font_style;
-	static final int DEFAULT_STYLE = Font.PLAIN;
+	public Alignment alignment;
 	
-	public float  font_size; // fraction of the height of the window, [0, 1] range
-	static final float DEFAULT_SIZE = 0.1f;
-	
-	public static final float PX_TO_PT = 1.3333f;
-	public static final float PT_TO_PX = 0.75F;
-	// @Note: font size 1 px = 0.75 pt
-	//					1 pt = 1.33 px
-	
-	
-	public Color color;
-	static final Color DEFAULT_COLOR= new Color(0, 0, 0, 255);
-	
-	public Justification just;
-	static final Justification DEFAULT_JUST = Justification.CENTER;
-	
-	public SlideText() {
-		super(.25f, .25f);
-		text = "";
-		font_size = DEFAULT_SIZE;
-		font_style = DEFAULT_STYLE;
-		color = DEFAULT_COLOR;
-		just = DEFAULT_JUST;
-	}
+/*  INHERITED:
+	Color fill_color; // This could be the background/highlight color?
+	Color outline; // This is the text color
+*/
+	public boolean underlined;
+	public boolean double_underline;
+	public boolean crossed;
 	
 	public SlideText(String t) {
-		super(.25f, .25f);
+		super();
 		text = t;
-		font_size = DEFAULT_SIZE;
-		font_style = DEFAULT_STYLE;
-		color = DEFAULT_COLOR;
-		just = DEFAULT_JUST;
+		alignment = Alignment.CENTER;
+		font_name = "Arial";
+		font_style = FontStyle.PLAIN;
+		h = .2f;
+		outline = Color.BLACK;
+		fill_color = new Color(0,0,0,255);
+		type = TEXT;
 	}
 	
-	public SlideText(float x, float y, String t, float size) {
+	public SlideText(String t, float x, float y) {
 		super(x, y);
 		text = t;
-		font_name = DEFAULT_FONT_NAME;
-		setFont(null, Font.PLAIN, size);
-		color = DEFAULT_COLOR;
-		just = DEFAULT_JUST;
-	}
-	
-	public void setText(String t) {
-		text = t;
-	}
-	
-	public void setFont(String name, int style, float size) {
-		if (name != null) {
-			font_name = name;
-		}
-		font_style = style;
-		font_size = size;
-		
-	}
-	
-	public void setSize(float size) {
-		font_size = size;
-	}
-	
-	public void setColor(Color c) {
-		color = c;
+		alignment = Alignment.CENTER;
+		font_name = "Arial";
+		font_style = FontStyle.PLAIN;
+		h = .2f;
+		outline = Color.BLACK;
+		fill_color = new Color(0,0,0,255);
+		type = TEXT;
 	}
 
-	@Override
-	public void update(double dt) {
-		
-	}
-
-	public String toString() {
-		return "Text \""+text+"\"";
-	}
+//	@Override
+//	public float getMinW() {
+//		return 0.02f;
+//	}
+//
+//	@Override
+//	public float getMinH() {
+//		return 0.008f;
+//	}
+	
 }

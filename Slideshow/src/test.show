@@ -1,29 +1,63 @@
 [1]    ; Version number, don't delete
 
-@var x 0.4
+@macro True
+1
+@macro False
+0
 
-;-----------------------------
-@slide
+@var content_w 0.9
 
-@background 0.8 0.8 0.8 1 ; Set background color
-@text "Sample text"  pos $x 0.5 color 0.2 0.2 0.7 1 ;
-@rect $x 0.3 0.6 0.5 color 0.4 0.85 0.5 0.35
-@rect $x 0.1 0.2 0.2 color 1 0 0 1
-@text "Holi Andrea"
+@macro background_color 
+0.1 0.2 0.4 1
 
-;-----------------------------
-@slide
-@text "The END"
-@background 0.1 0.7 0.3 1
-@text "asdfasdfasd" pos 0.5 0.7 color 0 0 0 0.25
-@text "The end" pos 0.5 0.7 color 0 0 0 0.2
-@text "ASDFASDFASDF" pos 0.5 0.7 color 0 0 0 0.2
+@macro TitlePage title subtitle
+  @slide \
+  @background background_color \
+  @text title pos 0.5 0.4 0.4 0.25 fill_color 0.95 0.95 0.95 1 font_style "bold" font_name "Calibri" \
+  @text subtitle pos 0.5 0.55 0.4 0.1 fill_color 0.8 0.8 0.8 1 font_style "italic" font_name "Calibri" \
+  @macro Author name \ 
+  @text name pos 0.5 0.9 0.9 0.1 alignment "right" fill_color 0.8 0.8 0.8 1 font_name "Calibri"
 
-;-----------------------------
-@slide
-@text "123456 tesst"
+@macro TitleAndContent title
+  @slide \
+  @background background_color \
+  @text title pos 0.5 0.1 0.8 0.14 fill_color 0.95 0.95 0.95 1 font_style "Bold" underlined False font_name "Calibri" \
+  @macro ContentStyle \
+  font_style "plain" fill_color 0.8 0.8 0.8 1 font_name "Courier New" \
+  @macro Style \
+    ContentStyle
+  
+@macro PlainStyle
+  fill_color 0.8 0.8 0.8 1 font_style "plain" underlined False
 
-@slide
-@text "End" pos 0.5 0.5
-@rect 0.2 0.2 0.7 0.7 color 1 0.2 0.2 0.3
-@background 0.4 0.7 0.7 1
+ 
+; Presentation start
+@TitlePage "Visualizador de Red" "Pequeño editor de graficos de red"
+@Author "Imanol Ramajo del Castillo"
+
+; 1
+@TitleAndContent "Objetivo"
+
+@var line_y 0.2
+
+@macro NextLine 
+  @var line_y $line_y + 0.08
+
+
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+@NextLine
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+@NextLine
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+@NextLine
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+@NextLine
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+@NextLine
+@text "Esto es el cuerpo de la diapositiva" pos 0.5 $line_y 0.9 0.1 Style
+
+; 2
+@TitleAndContent "Alcance"
+
+; 3
+@TitleAndContent "Referencias"
