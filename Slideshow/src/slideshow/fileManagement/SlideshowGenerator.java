@@ -196,6 +196,37 @@ public class SlideshowGenerator {
 					}
 					new_slide.items.add(text_item);
 				} break;
+				case "line": {
+					i++;
+					float x = parse_expr(T);
+					float y = parse_expr(T);
+					float w = parse_expr(T);
+					float h = parse_expr(T);
+					
+					SlideLine line_item = new SlideLine(x, y, w, h);
+					
+					while (i < T.size()-1 && !T.get(i).equals("@") && !T.get(i).equals("\n")) {
+						String prop = T.get(i); // prop: properties
+						i++;
+						switch (prop) {
+						case "outline": {
+							int r = (int)(255*parse_expr(T));
+							int g = (int)(255*parse_expr(T));
+							int b = (int)(255*parse_expr(T));
+							int a = (int)(255*parse_expr(T));
+							line_item.outline = new Color(r, g, b, a);
+						} break;
+						case "thickness": {
+							float weight = parse_expr(T);
+							line_item.thickness = weight;
+						} break;
+						default: {
+							System.err.println("Unknown property: " + prop);
+						} break;
+						}
+					}
+					new_slide.items.add(line_item);
+				} break;
 				case "rect": {
 					i++;
 					float x = parse_expr(T);
@@ -204,13 +235,11 @@ public class SlideshowGenerator {
 					float h = parse_expr(T);
 					
 					SlideRect rect_item = new SlideRect(x, y, w, h);
-					
-					while (i < T.size()-1 && !T.get(i+1).equals("@")) {
+					while (i < T.size()-1 && !T.get(i).equals("@") && !T.get(i).equals("\n")) {
+						String prop = getToken(T); // prop: properties
 						i++;
-						String prop = T.get(i); // prop: properties
 						switch (prop) {
 						case "fill_color": {
-							i++;
 							int r = (int)(255*parse_expr(T));
 							int g = (int)(255*parse_expr(T));
 							int b = (int)(255*parse_expr(T));
@@ -219,7 +248,6 @@ public class SlideshowGenerator {
 						} break;
 						
 						case "outline": {
-							i++;
 							int r = (int)(255*parse_expr(T));
 							int g = (int)(255*parse_expr(T));
 							int b = (int)(255*parse_expr(T));
@@ -227,7 +255,6 @@ public class SlideshowGenerator {
 							rect_item.outline = new Color(r, g, b, a);
 						} break;
 						case "rot": {
-							i++;
 							float rotation = parse_expr(T);
 							rect_item.rotation = rotation;
 						} break;

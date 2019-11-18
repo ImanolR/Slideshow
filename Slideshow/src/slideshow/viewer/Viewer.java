@@ -15,24 +15,6 @@ import slideshow.slides.Items.SlideText;
 import slideshow.slides.Items.Slideshow;
 
 public class Viewer implements KeyListener {
-
-/*	
-	------------------
-	    TO DO
-	------------------
-	
-	- Fullscreen mode
-	
-	- Cursor
-	  - Smooth moving of the cursor
-	
-	- File loading
-	  - Basic format (text document)
-	    - Templates
-	      - @slide templetName
-	      - @template templetName
-	   - Images
-*/
 	
 	
 	private JFrame window;

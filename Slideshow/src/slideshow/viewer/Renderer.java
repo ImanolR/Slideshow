@@ -174,15 +174,32 @@ public class Renderer {
 						dim.y + offset_y,
 						image_item.rotation);
 			}
+			else if (item instanceof SlideLine) {
+				SlideLine line_item = (SlideLine) item;
+				transform(g,
+						/*dim.x +*/ offset_x,
+						/*dim.y +*/ offset_y,
+						line_item.rotation);
+				
+				g.setStroke(new BasicStroke(line_item.thickness * height));
+				g.setColor(line_item.outline);
+				g.drawLine(dim.x, dim.y, dim.width, dim.height);
+				
+				detransform(g,
+						/*dim.x +*/ offset_x,
+						/*dim.y +*/ offset_y,
+						line_item.rotation);
+				
+			}
 			else if (item instanceof SlideRect) {
 				SlideRect rect_item = (SlideRect) item;
-				g.setColor(rect_item.fill_color);
 				
 				transform(g,
 						dim.x + offset_x,
 						dim.y + offset_y,
 						rect_item.rotation);
 				
+				g.setColor(rect_item.fill_color);
 				g.fillRect(-dim.width/2, -dim.height/2, dim.width, dim.height);
 				g.setColor(rect_item.outline);
 				g.drawRect(-dim.width/2, -dim.height/2, dim.width, dim.height);

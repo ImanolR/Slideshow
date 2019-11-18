@@ -4,11 +4,12 @@ import java.awt.Color;
 
 public abstract class SlideItem {
 
-	public static final int RECTANGLE = 1;
-	public static final int IMAGE     = 2;
-	public static final int TEXT      = 3;
-	public static final int CIRCLE    = 4;
-	public static final int POLYGON   = 5;
+	public static final int LINE      = 1;
+	public static final int RECTANGLE = 2;
+	public static final int IMAGE     = 3;
+	public static final int TEXT      = 4;
+	public static final int CIRCLE    = 5;
+	public static final int POLYGON   = 6;
 
 	public int type;
 	
@@ -43,7 +44,4 @@ public abstract class SlideItem {
 	public void update(double dt) {
 		
 	}
-
-//	public abstract float getMinW();
-//	public abstract float getMinH();
 }
